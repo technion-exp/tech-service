@@ -1,21 +1,21 @@
 {
   "files": {
     "main.css": "/tech-service/static/css/main.7e78b886.chunk.css",
-    "main.js": "/tech-service/static/js/main.8ca6f5db.chunk.js",
-    "main.js.map": "/tech-service/static/js/main.8ca6f5db.chunk.js.map",
+    "main.js": "/tech-service/static/js/main.5246ea0a.chunk.js",
+    "main.js.map": "/tech-service/static/js/main.5246ea0a.chunk.js.map",
     "runtime-main.js": "/tech-service/static/js/runtime-main.0bdc9b93.js",
     "runtime-main.js.map": "/tech-service/static/js/runtime-main.0bdc9b93.js.map",
-    "static/js/2.1c354443.chunk.js": "/tech-service/static/js/2.1c354443.chunk.js",
-    "static/js/2.1c354443.chunk.js.map": "/tech-service/static/js/2.1c354443.chunk.js.map",
+    "static/js/2.df0e57fe.chunk.js": "/tech-service/static/js/2.df0e57fe.chunk.js",
+    "static/js/2.df0e57fe.chunk.js.map": "/tech-service/static/js/2.df0e57fe.chunk.js.map",
     "index.html": "/tech-service/index.html",
     "static/css/main.7e78b886.chunk.css.map": "/tech-service/static/css/main.7e78b886.chunk.css.map",
-    "static/js/2.1c354443.chunk.js.LICENSE.txt": "/tech-service/static/js/2.1c354443.chunk.js.LICENSE.txt",
+    "static/js/2.df0e57fe.chunk.js.LICENSE.txt": "/tech-service/static/js/2.df0e57fe.chunk.js.LICENSE.txt",
     "static/media/index.css": "/tech-service/static/media/NunitoSans-Light.7f9eed4c.ttf"
   },
   "entrypoints": [
     "static/js/runtime-main.0bdc9b93.js",
-    "static/js/2.1c354443.chunk.js",
+    "static/js/2.df0e57fe.chunk.js",
     "static/css/main.7e78b886.chunk.css",
-    "static/js/main.8ca6f5db.chunk.js"
+    "static/js/main.5246ea0a.chunk.js"
   ]
 }
