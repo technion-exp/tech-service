@@ -1,0 +1,11 @@
+.agree-flex-content {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'NunitoSans-Light';
+    font-style: normal;
+    background-color: #F7F7F7;
+    height: 100vh;
+    margin: 0;
+  }

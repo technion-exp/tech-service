@@ -1,0 +1,21 @@
+
+@font-face {
+  font-family: 'NunitoSans';
+  src: local('NunitoSans'), url(./fonts/NunitoSans-Black.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'NunitoSans-Light';
+  src: local('NunitoSans-Light'), url(./fonts/NunitoSans-Light.ttf) format('truetype');
+}
+
+
+
+* {
+  box-sizing: border-box;
+}
+
+#page-wrap {
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
