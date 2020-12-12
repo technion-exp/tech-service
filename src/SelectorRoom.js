@@ -4,10 +4,20 @@ import './SelectorRoom.css';
 import {getImages} from './imagesStore'
 import { withRouter } from 'react-router-dom';
 import CircProgress from './circular_wait';
-import BotNav from './BotNav'
+import { makeStyles } from '@material-ui/core/styles';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
+import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
 
 
-var added = false
+const useStyles = makeStyles({
+    root: {
+      width: 500,
+    },
+  });
+
 
 
 function tileViewportStyleFn() { 
@@ -72,6 +82,9 @@ class SelectorRoom extends React.Component{
             displyedItemImages: [initImages1, initImages2, initImages3],
             isRegular: this.props.isRegular,
             totalTime: 0,
+            value: 0,
+            clickedRegularViewMore: [0,0,0],
+            clickedVipViewMore: [0,0,0]
         }
     }
 
@@ -81,9 +94,11 @@ class SelectorRoom extends React.Component{
         let updatePicNumArr = this.state.numOfRegularItems;
         if (this.state.numOfRegularItems[this.state.itemNumber] !== this.state.images[this.state.itemNumber].regularImages.length)
         {
+            var newClick = Array.from(this.state.clickedRegularViewMore);
+            newClick[this.state.itemNumber] = newClick[this.state.itemNumber] + 1;
             updatePicNumArr[this.state.itemNumber] = this.state.numOfRegularItems[this.state.itemNumber]+1;
             newImages[this.state.itemNumber].push(this.state.images[this.state.itemNumber].regularImages[updatePicNumArr[this.state.itemNumber]-1]);
-            this.setState({displyedItemImages: newImages, numOfRegularItems: updatePicNumArr, isScroll: true})
+            this.setState({displyedItemImages: newImages, numOfRegularItems: updatePicNumArr, isScroll: true, clickedRegularViewMore: newClick})
         }
         else {
             //nothing to add more
@@ -95,9 +110,11 @@ class SelectorRoom extends React.Component{
         let updatePicNumArr = this.state.numOfVipItems;
         if (this.state.numOfVipItems[this.state.itemNumber] !== this.state.images[this.state.itemNumber].vipImages.length)
         {
+            var newClick = Array.from(this.state.clickedVipViewMore);
+            newClick[this.state.itemNumber] = newClick[this.state.itemNumber] + 1;
             updatePicNumArr[this.state.itemNumber] = this.state.numOfVipItems[this.state.itemNumber]+1;
             newImages[this.state.itemNumber].push(this.state.images[this.state.itemNumber].vipImages[updatePicNumArr[this.state.itemNumber]-1]);
-            this.setState({displyedItemImages: newImages, numOfVipItems: updatePicNumArr, isScroll: true})
+            this.setState({displyedItemImages: newImages, numOfVipItems: updatePicNumArr, isScroll: true, clickedVipViewMore: newClick})
         }
         else {
             //nothing to add more
@@ -206,6 +223,9 @@ class SelectorRoom extends React.Component{
             spendTime: this.state.totalTime, 
             totalPrice: this.state.totalPrice,
             budget: this.state.budget,
+            isRegular: this.state.isRegular,
+            clickedRegularViewMore: this.state.clickedRegularViewMore,
+            clickedVipViewMore: this.state.clickedVipViewMore,
         }
           this.props.history.push({
               pathname: '/complete_purchase',
@@ -218,7 +238,7 @@ class SelectorRoom extends React.Component{
             <div className="selector-fonts">
                 <h2 style={{margin: '0px', paddingTop: '3px', paddingLeft: '15%', paddingRight: '15%'}}>Choose an option you like most of all</h2>
                 <div className="selector-flex-content">
-                    <div style={{"display": "flex", "flexFlow": "column", paddingRight: "1%", marginRight: "10px"}}>
+                        <div style={{"display": "flex", "flexFlow": "column", paddingRight: "1%", marginRight: "10px"}}>
                         <button style= 
                         {
                             { 
@@ -255,30 +275,45 @@ class SelectorRoom extends React.Component{
                             }
                         } 
                         onClick={()=> this.handleVipViewMoreClick()}>View VIP option for 2 sec</button> : null}
-                        <CircProgress></CircProgress>
                     </div>
-                    <div id="gal" className="gallery">
-                        <Gallery
-                            tileViewportStyle={tileViewportStyleFn}
-                            thumbnailStyle={thumbnailStyleFn}
-                            enableLightbox={false}
-                            onClickThumbnail={(index) => this.onSelectImage(index, null)}
-                            images={this.state.displyedItemImages[this.state.itemNumber]}
-                            enableImageSelection={false}
-                            onSelectImage={(index, image) => this.onSelectImage(index, image)}
-                            margin={5}
-                        />                
-                    </div>
+                        <div id="gal" className="gallery">
+                            <Gallery
+                                tileViewportStyle={tileViewportStyleFn}
+                                thumbnailStyle={thumbnailStyleFn}
+                                enableLightbox={false}
+                                onClickThumbnail={(index) => this.onSelectImage(index, null)}
+                                images={this.state.displyedItemImages[this.state.itemNumber]}
+                                enableImageSelection={false}
+                                onSelectImage={(index, image) => this.onSelectImage(index, image)}
+                                margin={5}
+                            />                
+                        </div>
                 </div>
-                <label style={{"color": "green"}}>{"Budget: "+ this.state.budget.toFixed(2) + " $"}<br></br></label>
-                <label style={{"color": "red"}}>{"Total: " + this.state.totalPrice.toFixed(2) + " $"} <br></br><br></br></label>   
-                <div className="item_buttons">
-                    <button disabled={this.state.itemNumber === 0} onClick={()=> this.handlePrevClick()}>Previous Item</button>
-                    {this.isAllItemsSelected() ? <button onClick={()=> this.handleFinishClick()}>Finish</button> : null}
-                    <button disabled={!this.isNextItemEnabled()} onClick={()=> this.handleNextClick()}>Next Item</button>
-                    <BotNav></BotNav>
+                <div style={{flexFlow: 'column', backgroundColor: '#F7F7F7'}}>
+                        <label style={{"color": "green"}}>{"Budget: "+ this.state.budget.toFixed(2) + " $"}<br></br></label>
+                        <label style={{"color": "red"}}>{"Total: " + this.state.totalPrice.toFixed(2) + " $"} <br></br><br></br></label>   
+                        <div className="item_buttons">
+                            <BottomNavigation style={ {backgroundColor: '#F7F7F7', justifyContent: 'space-between', width: '100%'} }
+                                
+                                onChange={(event, newValue) => {
+                                    if (newValue === 0) {
+                                        this.handlePrevClick();
+                                    }
+                                    else if (newValue === 1) {
+                                        this.handleFinishClick();
+                                    }
+                                    else {
+                                        this.handleNextClick();
+                                    }
+                                }}
+                                showLabels
+                                >
+                                <BottomNavigationAction disabled={this.state.itemNumber === 0} value={0} label="Previous item" icon={<NavigateBeforeIcon />} />
+                                {this.isAllItemsSelected() ? <BottomNavigationAction value={1} label="Complete" icon={<DoneOutlineIcon/>} /> : null } 
+                                <BottomNavigationAction disabled={!this.isNextItemEnabled()} value={2} label="Next Item" icon={<NavigateNextIcon />} />
+                            </BottomNavigation>
+                        </div>
                 </div>
-                
             </div>
         );
     }

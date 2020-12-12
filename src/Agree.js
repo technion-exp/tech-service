@@ -1,5 +1,6 @@
 import React from 'react';
 import './Agree.css';
+import './my-button.css'
 import { withRouter } from "react-router";
 
 class Agree extends React.Component{
@@ -37,7 +38,7 @@ class Agree extends React.Component{
             <label> Yes, I agree.</label>
            </div>
            <br></br>
-          <button disabled={!this.state.isAgree} onClick={()=> this.handleClick()}>Next</button>
+          <button className="my-button" disabled={!this.state.isAgree} onClick={()=> this.handleClick()}>Next</button>
        </div>
       );
     }

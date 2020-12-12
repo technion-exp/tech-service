@@ -1,6 +1,8 @@
 import React from 'react';
 import Gallery from 'react-grid-gallery';
 import './Finish.css';
+import './my-button.css';
+import emailjs from 'emailjs-com';
 
 function tileViewportStyleFn() { 
     return ({
@@ -39,11 +41,31 @@ class Finish extends React.Component{
         finishDate: this.props.locationData.pData.finishDate,
         userItems: Array.from(this.props.locationData.pData.userItems),
         totalPrice: this.props.locationData.pData.totalPrice,
-        budget: this.props.locationData.pData.budget
+        budget: this.props.locationData.pData.budget,
+        isRegular: this.props.locationData.pData.isRegular,
+        clickedRegularViewMore: this.props.locationData.pData.clickedRegularViewMore,
+        clickedVipViewMore: this.props.locationData.pData.clickedVipViewMore,
       }
     }
 
-
+    sendReportToEmail() {
+        var templateParams = {
+            finishDate: this.state.finishDate,
+            totalPrice: this.state.totalPrice,
+            budget: this.state.budget,
+            from_name: 'Experiment',
+            isRegular: this.state.isRegular,
+            clickedRegularViewMore: this.state.clickedRegularViewMore,
+            clickedVipViewMore: this.state.clickedVipViewMore,
+        };
+         
+        emailjs.send('service_8ww919p', 'template_h1x55nb', templateParams, 'user_KnDPo0mi8tW6gzapNbVeb')
+            .then(function(response) {
+               console.log('SUCCESS!', response.status, response.text);
+            }, function(error) {
+               console.log('FAILED...', error);
+            });
+    }
     
     render() {
         return (
@@ -62,7 +84,7 @@ class Finish extends React.Component{
                 </div>
                 <label style={{"color": "green"}}>{"Budget: "+ this.state.budget.toFixed(2) + " $"}<br></br></label>
                 <label style={{"color": "red"}}>{"Total: " + this.state.totalPrice.toFixed(2) + " $"} <br></br><br></br></label>   
-                <button  onClick={()=> console.log("completed")}>COMPLETE</button>
+                <button className="my-button"  onClick={()=> this.sendReportToEmail()}>COMPLETE</button>
             </div>
         );
     }

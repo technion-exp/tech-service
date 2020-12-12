@@ -1,6 +1,7 @@
 import React from 'react';
 import './Story.css';
 import { withRouter } from "react-router";
+import './my-button.css'
 
 class Story extends React.Component{
     constructor (props) {
@@ -31,7 +32,7 @@ class Story extends React.Component{
            <h2>Story text</h2>
             {isRegular === true ? <h3>Regular user</h3> : <h3>VIP user</h3> }
            <br></br>
-          <button onClick={()=> this.handleClick()}>Lets start</button>
+          <button className="my-button" onClick={()=> this.handleClick()}>Lets start</button>
        </div>
       );
     }
