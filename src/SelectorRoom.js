@@ -1,443 +1,107 @@
 import React from 'react';
 import Gallery from 'react-grid-gallery';
 import './SelectorRoom.css';
-import f1 from './images/Item_1_Fridge/1_655_555.jpg'
+import {getImages} from './imagesStore'
+import { withRouter } from 'react-router-dom';
+import CircProgress from './circular_wait';
+import BotNav from './BotNav'
 
 
-const defImages=[
-    [
-        {
-            src: f1,
-            thumbnail: f1,
-            thumbnailWidth: 240,
-            thumbnailHeight: 320,
-            caption: "555.00",
-            thumbnailCaption: (
-                <div>
-                    <del>
-                        <span>655.00$</span>
-                    </del>
-                    <span> 555.00$</span>
-                </div>
-            ),
-            isSelected: false,
-        },
-        {
-            src: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_b.jpg",
-            thumbnail: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_n.jpg",
-            thumbnailWidth: 320,
-            thumbnailHeight: 190,
-            isSelected: false,
-            caption: "19.99",
-            thumbnailCaption: (
-                <div>
-                    <del>
-                        <span>20$</span>
-                    </del>
-                    <span> Vip option  19.99$</span>
-                </div>
-            )
-        },
-        {
-            src: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_b.jpg",
-            thumbnail: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_n.jpg",
-            thumbnailWidth: 320,
-            isSelected: false,
-            thumbnailHeight: 190,
-            caption: "30.00",
-            thumbnailCaption: "30$"
-        },
-        {
-            src: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_b.jpg",
-            thumbnail: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_n.jpg",
-            thumbnailWidth: 320,
-            isSelected: false,
-            thumbnailHeight: 190,
-            caption: "40.00",
-            thumbnailCaption: "40$"
-        },
-        {
-            src: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_b.jpg",
-            thumbnail: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_n.jpg",
-            thumbnailWidth: 320,
-            isSelected: false,
-            thumbnailHeight: 190,
-            caption: "126.00",
-            thumbnailCaption: "126$"
-        },
-        {
-            src: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_b.jpg",
-            thumbnail: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_n.jpg",
-            thumbnailWidth: 320,
-            isSelected: false,
-            thumbnailHeight: 190,
-            caption: "333.00",
-            thumbnailCaption: "333$"
-        },
-        {
-            src: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_b.jpg",
-            thumbnail: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_n.jpg",
-            thumbnailWidth: 320,
-            isSelected: false,
-            thumbnailHeight: 190,
-            caption: "15.00",
-            thumbnailCaption: "15$"
-        },
-        {
-            src: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_b.jpg",
-            thumbnail: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_n.jpg",
-            thumbnailWidth: 320,
-            isSelected: false,
-            thumbnailHeight: 190,
-            caption: "15.00",
-            thumbnailCaption: "15$"
-        },
-        {
-            src: "https://c7.staticflickr.com/9/8569/28941134686_d57273d933_b.jpg",
-            thumbnail: "https://c7.staticflickr.com/9/8569/28941134686_d57273d933_n.jpg",
-            thumbnailWidth: 320,
-            isSelected: false,
-            thumbnailHeight: 148,
-            caption: "15.00",
-            thumbnailCaption: "15$"
-        },
-        {
-            src: "https://c6.staticflickr.com/9/8342/28897193381_800db6419e_b.jpg",
-            thumbnail: "https://c6.staticflickr.com/9/8342/28897193381_800db6419e_n.jpg",
-            thumbnailWidth: 320,
-            isSelected: false,
-            thumbnailHeight: 213,
-            caption: "15.00",
-            thumbnailCaption: "15$"
-        },
-        {
-            src: "https://c2.staticflickr.com/9/8239/28897202241_1497bec71a_b.jpg",
-            thumbnail: "https://c2.staticflickr.com/9/8239/28897202241_1497bec71a_n.jpg",
-            thumbnailWidth: 248,
-            isSelected: false,
-            thumbnailHeight: 320,
-            caption: "15.00",
-            thumbnailCaption: "15$"
-        },
-        {
-            src: "https://c7.staticflickr.com/9/8785/28687743710_3580fcb5f0_b.jpg",
-            thumbnail: "https://c7.staticflickr.com/9/8785/28687743710_3580fcb5f0_n.jpg",
-            thumbnailWidth: 320,
-            isSelected: false,
-            thumbnailHeight: 113,
-            caption: "99.99",
-            thumbnailCaption: "99.99$"
-        },
-        {
-            src: "https://c6.staticflickr.com/9/8520/28357073053_cafcb3da6f_b.jpg",
-            thumbnail: "https://c6.staticflickr.com/9/8520/28357073053_cafcb3da6f_n.jpg",
-            thumbnailWidth: 313,
-            isSelected: false,
-            thumbnailHeight: 320,
-            caption: "15.00",
-            thumbnailCaption: "15$"
-        },
-        {
-            src: "https://c8.staticflickr.com/9/8104/28973555735_ae7c208970_b.jpg",
-            thumbnail: "https://c8.staticflickr.com/9/8104/28973555735_ae7c208970_n.jpg",
-            thumbnailWidth: 320,
-            isSelected: false,
-            thumbnailHeight: 213,
-            caption: "15.00",
-            thumbnailCaption: "15$"
-        }
-    ],
-    [
-        {
-            src: "https://c5.staticflickr.com/9/8768/28941110956_b05ab588c1_b.jpg",
-            thumbnail: "https://c5.staticflickr.com/9/8768/28941110956_b05ab588c1_n.jpg",
-            thumbnailWidth: 240,
-            thumbnailHeight: 320,
-            caption: "10.00",
-            thumbnailCaption: "10$",
-            isSelected: false,
-        },
-        {
-            src: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_b.jpg",
-            thumbnail: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_n.jpg",
-            thumbnailWidth: 320,
-            thumbnailHeight: 190,
-            isSelected: false,
-            caption: "19.99",
-            thumbnailCaption: (
-                <div>
-                    <del>
-                        <span>20$</span>
-                    </del>
-                    <span> Vip option  19.99$</span>
-                </div>
-            )
-        },
-        {
-            src: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_b.jpg",
-            thumbnail: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_n.jpg",
-            thumbnailWidth: 320,
-            isSelected: false,
-            thumbnailHeight: 190,
-            caption: "30.00",
-            thumbnailCaption: "30$"
-        },
-        {
-            src: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_b.jpg",
-            thumbnail: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_n.jpg",
-            thumbnailWidth: 320,
-            isSelected: false,
-            thumbnailHeight: 190,
-            caption: "40.00",
-            thumbnailCaption: "40$"
-        },
-        {
-            src: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_b.jpg",
-            thumbnail: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_n.jpg",
-            thumbnailWidth: 320,
-            isSelected: false,
-            thumbnailHeight: 190,
-            caption: "126.00",
-            thumbnailCaption: "126$"
-        },
-        {
-            src: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_b.jpg",
-            thumbnail: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_n.jpg",
-            thumbnailWidth: 320,
-            isSelected: false,
-            thumbnailHeight: 190,
-            caption: "333.00",
-            thumbnailCaption: "333$"
-        },
-        {
-            src: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_b.jpg",
-            thumbnail: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_n.jpg",
-            thumbnailWidth: 320,
-            isSelected: false,
-            thumbnailHeight: 190,
-            caption: "15.00",
-            thumbnailCaption: "15$"
-        },
-        {
-            src: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_b.jpg",
-            thumbnail: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_n.jpg",
-            thumbnailWidth: 320,
-            isSelected: false,
-            thumbnailHeight: 190,
-            caption: "15.00",
-            thumbnailCaption: "15$"
-        },
-        {
-            src: "https://c7.staticflickr.com/9/8569/28941134686_d57273d933_b.jpg",
-            thumbnail: "https://c7.staticflickr.com/9/8569/28941134686_d57273d933_n.jpg",
-            thumbnailWidth: 320,
-            isSelected: false,
-            thumbnailHeight: 148,
-            caption: "15.00",
-            thumbnailCaption: "15$"
-        },
-        {
-            src: "https://c6.staticflickr.com/9/8342/28897193381_800db6419e_b.jpg",
-            thumbnail: "https://c6.staticflickr.com/9/8342/28897193381_800db6419e_n.jpg",
-            thumbnailWidth: 320,
-            isSelected: false,
-            thumbnailHeight: 213,
-            caption: "15.00",
-            thumbnailCaption: "15$"
-        },
-        {
-            src: "https://c2.staticflickr.com/9/8239/28897202241_1497bec71a_b.jpg",
-            thumbnail: "https://c2.staticflickr.com/9/8239/28897202241_1497bec71a_n.jpg",
-            thumbnailWidth: 248,
-            isSelected: false,
-            thumbnailHeight: 320,
-            caption: "15.00",
-            thumbnailCaption: "15$"
-        },
-        {
-            src: "https://c7.staticflickr.com/9/8785/28687743710_3580fcb5f0_b.jpg",
-            thumbnail: "https://c7.staticflickr.com/9/8785/28687743710_3580fcb5f0_n.jpg",
-            thumbnailWidth: 320,
-            isSelected: false,
-            thumbnailHeight: 113,
-            caption: "99.99",
-            thumbnailCaption: "99.99$"
-        },
-        {
-            src: "https://c6.staticflickr.com/9/8520/28357073053_cafcb3da6f_b.jpg",
-            thumbnail: "https://c6.staticflickr.com/9/8520/28357073053_cafcb3da6f_n.jpg",
-            thumbnailWidth: 313,
-            isSelected: false,
-            thumbnailHeight: 320,
-            caption: "15.00",
-            thumbnailCaption: "15$"
-        },
-        {
-            src: "https://c8.staticflickr.com/9/8104/28973555735_ae7c208970_b.jpg",
-            thumbnail: "https://c8.staticflickr.com/9/8104/28973555735_ae7c208970_n.jpg",
-            thumbnailWidth: 320,
-            isSelected: false,
-            thumbnailHeight: 213,
-            caption: "15.00",
-            thumbnailCaption: "15$"
-        }
-    ],
-    [
-        {
-            src: "https://c5.staticflickr.com/9/8768/28941110956_b05ab588c1_b.jpg",
-            thumbnail: "https://c5.staticflickr.com/9/8768/28941110956_b05ab588c1_n.jpg",
-            thumbnailWidth: 240,
-            thumbnailHeight: 320,
-            caption: "10.00",
-            thumbnailCaption: "10$",
-            isSelected: false,
-        },
-        {
-            src: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_b.jpg",
-            thumbnail: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_n.jpg",
-            thumbnailWidth: 320,
-            thumbnailHeight: 190,
-            isSelected: false,
-            caption: "19.99",
-            thumbnailCaption: (
-                <div>
-                    <del>
-                        <span>20$</span>
-                    </del>
-                    <span> Vip option  19.99$</span>
-                </div>
-            )
-        },
-        {
-            src: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_b.jpg",
-            thumbnail: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_n.jpg",
-            thumbnailWidth: 320,
-            isSelected: false,
-            thumbnailHeight: 190,
-            caption: "30.00",
-            thumbnailCaption: "30$"
-        },
-        {
-            src: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_b.jpg",
-            thumbnail: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_n.jpg",
-            thumbnailWidth: 320,
-            isSelected: false,
-            thumbnailHeight: 190,
-            caption: "40.00",
-            thumbnailCaption: "40$"
-        },
-        {
-            src: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_b.jpg",
-            thumbnail: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_n.jpg",
-            thumbnailWidth: 320,
-            isSelected: false,
-            thumbnailHeight: 190,
-            caption: "126.00",
-            thumbnailCaption: "126$"
-        },
-        {
-            src: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_b.jpg",
-            thumbnail: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_n.jpg",
-            thumbnailWidth: 320,
-            isSelected: false,
-            thumbnailHeight: 190,
-            caption: "333.00",
-            thumbnailCaption: "333$"
-        },
-        {
-            src: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_b.jpg",
-            thumbnail: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_n.jpg",
-            thumbnailWidth: 320,
-            isSelected: false,
-            thumbnailHeight: 190,
-            caption: "15.00",
-            thumbnailCaption: "15$"
-        },
-        {
-            src: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_b.jpg",
-            thumbnail: "https://c3.staticflickr.com/9/8583/28354353794_9f2d08d8c0_n.jpg",
-            thumbnailWidth: 320,
-            isSelected: false,
-            thumbnailHeight: 190,
-            caption: "15.00",
-            thumbnailCaption: "15$"
-        },
-        {
-            src: "https://c7.staticflickr.com/9/8569/28941134686_d57273d933_b.jpg",
-            thumbnail: "https://c7.staticflickr.com/9/8569/28941134686_d57273d933_n.jpg",
-            thumbnailWidth: 320,
-            isSelected: false,
-            thumbnailHeight: 148,
-            caption: "15.00",
-            thumbnailCaption: "15$"
-        },
-        {
-            src: "https://c6.staticflickr.com/9/8342/28897193381_800db6419e_b.jpg",
-            thumbnail: "https://c6.staticflickr.com/9/8342/28897193381_800db6419e_n.jpg",
-            thumbnailWidth: 320,
-            isSelected: false,
-            thumbnailHeight: 213,
-            caption: "15.00",
-            thumbnailCaption: "15$"
-        },
-        {
-            src: "https://c2.staticflickr.com/9/8239/28897202241_1497bec71a_b.jpg",
-            thumbnail: "https://c2.staticflickr.com/9/8239/28897202241_1497bec71a_n.jpg",
-            thumbnailWidth: 248,
-            isSelected: false,
-            thumbnailHeight: 320,
-            caption: "15.00",
-            thumbnailCaption: "15$"
-        },
-        {
-            src: "https://c7.staticflickr.com/9/8785/28687743710_3580fcb5f0_b.jpg",
-            thumbnail: "https://c7.staticflickr.com/9/8785/28687743710_3580fcb5f0_n.jpg",
-            thumbnailWidth: 320,
-            isSelected: false,
-            thumbnailHeight: 113,
-            caption: "99.99",
-            thumbnailCaption: "99.99$"
-        },
-        {
-            src: "https://c6.staticflickr.com/9/8520/28357073053_cafcb3da6f_b.jpg",
-            thumbnail: "https://c6.staticflickr.com/9/8520/28357073053_cafcb3da6f_n.jpg",
-            thumbnailWidth: 313,
-            isSelected: false,
-            thumbnailHeight: 320,
-            caption: "15.00",
-            thumbnailCaption: "15$"
-        },
-        {
-            src: "https://c8.staticflickr.com/9/8104/28973555735_ae7c208970_b.jpg",
-            thumbnail: "https://c8.staticflickr.com/9/8104/28973555735_ae7c208970_n.jpg",
-            thumbnailWidth: 320,
-            isSelected: false,
-            thumbnailHeight: 213,
-            caption: "15.00",
-            thumbnailCaption: "15$"
-        }
-    ],
-]
+var added = false
+
+
+function tileViewportStyleFn() { 
+    return ({
+            width: '175px',
+            height: '220px',
+            backgroundColor: 'white'
+        });
+}
+
+function thumbnailStyleFn() { 
+    var imgSrc = this.props.item.src;
+    if (!imgSrc.includes('VIP')) {
+        return ({
+                width: '175px',
+                height: '220px',
+                backgroundColor: 'white'
+            });
+    } 
+    else {
+        return ({
+            width: '175px',
+            height: '220px',
+            backgroundColor: 'white',
+            border: '8px solid transparent',
+            borderImage: 'linear-gradient(to bottom, gold, rgba(0, 0, 0, 0)) 1 100%'
+        });
+    }
+}
+
 
 class SelectorRoom extends React.Component{
     constructor (props) {
-      super(props)
-      this.state = {
-        showMore: false,
-        images: defImages,
-        itemNumber: 0,
-        numOfItems: [2,2,2],
-        selectedItems: [null,null,null],
-        selectedItemsPrices: [0.0,0.0,0.0],
-        budget: 100.0,
-        totalPrice: 0.0,
-        isScroll: false,
-      }
+        var defImages = getImages();
+        const initImages1 = (defImages[0].regularImages.map(item => 
+                                        {
+                                            item.isSelected = false;
+                                            return item
+                                        })).slice(0,2)
+        const initImages2 = (defImages[1].regularImages.map(item => 
+                                        {
+                                        item.isSelected = false;
+                                        return item
+                                        })).slice(0,2)
+        const initImages3 = (defImages[2].regularImages.map(item => 
+                                        {
+                                        item.isSelected = false;
+                                        return item
+                                        })).slice(0,2)
+        super(props)
+        this.state = {
+            showMore: false,
+            images: defImages,
+            itemNumber: 0,
+            numOfRegularItems: [2,2,2],
+            numOfVipItems: [0,0,0],
+            selectedItems: [null,null,null],
+            selectedItemsPrices: [0.0,0.0,0.0],
+            budget: 3000.0,
+            totalPrice: 0.0,
+            isScroll: false,
+            displyedItemImages: [initImages1, initImages2, initImages3],
+            isRegular: this.props.isRegular,
+            totalTime: 0,
+        }
     }
+
+
     handleRegularViewMoreClick() {
-      let updatePicNumArr = this.state.numOfItems;
-      updatePicNumArr[this.state.itemNumber] = this.state.numOfItems[this.state.itemNumber] === this.state.images[this.state.itemNumber].length ? this.state.numOfItems[this.state.itemNumber] : this.state.numOfItems[this.state.itemNumber]+1;
-      this.setState({numOfItems: updatePicNumArr, isScroll: true})
+        var newImages = [Array.from(this.state.displyedItemImages[0]), Array.from(this.state.displyedItemImages[1]), Array.from(this.state.displyedItemImages[2])];
+        let updatePicNumArr = this.state.numOfRegularItems;
+        if (this.state.numOfRegularItems[this.state.itemNumber] !== this.state.images[this.state.itemNumber].regularImages.length)
+        {
+            updatePicNumArr[this.state.itemNumber] = this.state.numOfRegularItems[this.state.itemNumber]+1;
+            newImages[this.state.itemNumber].push(this.state.images[this.state.itemNumber].regularImages[updatePicNumArr[this.state.itemNumber]-1]);
+            this.setState({displyedItemImages: newImages, numOfRegularItems: updatePicNumArr, isScroll: true})
+        }
+        else {
+            //nothing to add more
+        }
+    }
+
+    handleVipViewMoreClick() {
+        var newImages = [Array.from(this.state.displyedItemImages[0]), Array.from(this.state.displyedItemImages[1]), Array.from(this.state.displyedItemImages[2])];
+        let updatePicNumArr = this.state.numOfVipItems;
+        if (this.state.numOfVipItems[this.state.itemNumber] !== this.state.images[this.state.itemNumber].vipImages.length)
+        {
+            updatePicNumArr[this.state.itemNumber] = this.state.numOfVipItems[this.state.itemNumber]+1;
+            newImages[this.state.itemNumber].push(this.state.images[this.state.itemNumber].vipImages[updatePicNumArr[this.state.itemNumber]-1]);
+            this.setState({displyedItemImages: newImages, numOfVipItems: updatePicNumArr, isScroll: true})
+        }
+        else {
+            //nothing to add more
+        }
     }
 
     handleNextClick() {
@@ -460,16 +124,27 @@ class SelectorRoom extends React.Component{
 
 
     onSelectImage (index, image) {
-        var images = this.state.images.slice();
         var currentItem = this.state.itemNumber;
+        var displayedImages = this.state.displyedItemImages.slice();
         var sSelectedItems = this.state.selectedItems;
-        var img = images[currentItem][index];
+        var img = displayedImages[currentItem][index];
         var newPrice = this.state.totalPrice;
         var cSelectedItemsPrices = this.state.selectedItemsPrices;
         var newBudget = this.state.budget
 
+        //calculate price here
+        var currentPicPrice = parseFloat(img.caption)
+        newPrice = (newPrice - cSelectedItemsPrices[currentItem] + currentPicPrice)
+        newBudget = (newBudget + cSelectedItemsPrices[currentItem] - currentPicPrice)
+
+        if (newBudget < 0) {
+            alert("Not enough balance!");
+            return;
+        }
+
         //select new image
         img.isSelected = true;
+
 
         if (sSelectedItems[currentItem] !== null)
         {
@@ -477,22 +152,18 @@ class SelectorRoom extends React.Component{
             {
                 return;
             }
-            var prevImg = images[currentItem][sSelectedItems[currentItem]];
+            var prevImg = displayedImages[currentItem][sSelectedItems[currentItem]];
             //unselect prev image
             prevImg.isSelected = false;
         }
 
-        //calculate price here
-        var currentPicPrice = parseFloat(img.caption)
-        newPrice = (newPrice - cSelectedItemsPrices[currentItem] + currentPicPrice)
-        newBudget = (newBudget + cSelectedItemsPrices[currentItem] - currentPicPrice)
         cSelectedItemsPrices[currentItem] = currentPicPrice
         sSelectedItems[currentItem] = index
         
 
 
         this.setState({
-            images: images,
+            displayedImages: displayedImages,
             selectedItems: sSelectedItems,
             totalPrice: newPrice,
             selectedItemsPrices: cSelectedItemsPrices,
@@ -510,67 +181,107 @@ class SelectorRoom extends React.Component{
         const objDiv = document.getElementById('gal');
         objDiv.scrollTop = objDiv.scrollHeight;
     }
+      
+      
 
+    isNextItemEnabled() {
+        return (this.state.itemNumber < this.state.images.length-1) && (this.state.selectedItems[this.state.itemNumber] !== null)
+    }
+
+    handleFinishClick = () => {
+        //prepare data
+        //calculate finish date
+        var today = new Date();
+        var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        var dateTime = date+' '+time;
+
+        //prepare choosen items
+        var allSelectedItems = this.state.selectedItems;
+        var allDisplyedItemImages = this.state.displyedItemImages;
+        var userChoices = [allDisplyedItemImages[0][allSelectedItems[0]], allDisplyedItemImages[1][allSelectedItems[1]],allDisplyedItemImages[2][allSelectedItems[2]]];
+        var userData = {
+            finishDate: dateTime, 
+            userItems: userChoices, 
+            spendTime: this.state.totalTime, 
+            totalPrice: this.state.totalPrice,
+            budget: this.state.budget,
+        }
+          this.props.history.push({
+              pathname: '/complete_purchase',
+              pData: userData
+          });
+      }
 
     render() {
         return (
             <div className="selector-fonts">
+                <h2 style={{margin: '0px', paddingTop: '3px', paddingLeft: '15%', paddingRight: '15%'}}>Choose an option you like most of all</h2>
                 <div className="selector-flex-content">
-                    <div style={{"display": "flex", "flex-flow": "column", paddingRight: "1%", marginRight: "10px"}}>
-                        <label style={{"color": "green"}}>{"Budget: "+ this.state.budget.toFixed(2) + " $"}</label>
-                        <label style={{"color": "red"}}>{"Total: " + this.state.totalPrice.toFixed(2) + " $"} <br></br><br></br></label>
+                    <div style={{"display": "flex", "flexFlow": "column", paddingRight: "1%", marginRight: "10px"}}>
                         <button style= 
                         {
                             { 
-                                "border-radius": "50%",
-                                "background-color": "#4CAF50", /* Green */
+                                "borderRadius": "50%",
+                                "background": 'linear-gradient(to right, Green 0%, Green  51%, Green  100%)',
                                 "color": "white",
                                 "padding": "24px",
-                                "text-align": "center",
-                                "text-decoration": "none",
+                                "textAlign": "center",
+                                "textDecoration": "none",
                                 "display": "inline-block",
-                                "font-size": "14px",
+                                "fontSize": "14px",
                                 "margin": "4px 2px",
                                 "cursor": "pointer",
-                                "border": "2px solid #cfdcec"
+                                "border": "2px solid #cfdcec",
+                                "maxWidth": "126px",
                             }
                         } 
-                                onClick={()=> this.handleRegularViewMoreClick()}>View <br></br>additional <br></br>option<br></br> for 2 sec</button>
-                        <button style= 
+                                onClick={()=> this.handleRegularViewMoreClick()}>View additional option for 2 sec</button>
+                        { this.props.isRegular === false ? <button style= 
                         {
                             { 
-                                "border-radius": "50%",
-                                "background-color": "Red", /* Red */
-                                "color": "white",
+                                "borderRadius": "50%",
+                                "background": 'linear-gradient(to right, #F09819 0%, #EDDE5D  51%, #F09819  100%)',
+                                "color": "#0f4c81",
                                 "padding": "20px",
-                                "text-align": "center",
-                                "text-decoration": "none",
+                                "textAlign": "center",
+                                "textDecoration": "none",
                                 "display": "inline-block",
-                                "font-size": "14px",
+                                "fontSize": "14px",
                                 "margin": "4px 2px",
                                 "cursor": "pointer",
-                                "border": "2px solid #cfdcec"
+                                "border": "2px solid #cfdcec",
+                                "maxWidth": "117px",
                             }
                         } 
-                        onClick={()=> this.handleRegularViewMoreClick()}>View <br></br>additional <br></br>option<br></br> for 2 sec</button>
+                        onClick={()=> this.handleVipViewMoreClick()}>View VIP option for 2 sec</button> : null}
+                        <CircProgress></CircProgress>
                     </div>
                     <div id="gal" className="gallery">
-                        <h1>Choose an option you like most of all</h1>
                         <Gallery
-                            images={this.state.images[this.state.itemNumber].slice(0, this.state.numOfItems[this.state.itemNumber])}
-                            enableImageSelection={true}
+                            tileViewportStyle={tileViewportStyleFn}
+                            thumbnailStyle={thumbnailStyleFn}
+                            enableLightbox={false}
+                            onClickThumbnail={(index) => this.onSelectImage(index, null)}
+                            images={this.state.displyedItemImages[this.state.itemNumber]}
+                            enableImageSelection={false}
                             onSelectImage={(index, image) => this.onSelectImage(index, image)}
+                            margin={5}
                         />                
                     </div>
-                </div>   
+                </div>
+                <label style={{"color": "green"}}>{"Budget: "+ this.state.budget.toFixed(2) + " $"}<br></br></label>
+                <label style={{"color": "red"}}>{"Total: " + this.state.totalPrice.toFixed(2) + " $"} <br></br><br></br></label>   
                 <div className="item_buttons">
                     <button disabled={this.state.itemNumber === 0} onClick={()=> this.handlePrevClick()}>Previous Item</button>
-                    {this.isAllItemsSelected() ? <button onClick={()=> this.handleNextClick()}>Finish</button> : null}
-                    <button disabled={this.state.itemNumber === this.state.images.length-1} onClick={()=> this.handleNextClick()}>Next Item</button>
+                    {this.isAllItemsSelected() ? <button onClick={()=> this.handleFinishClick()}>Finish</button> : null}
+                    <button disabled={!this.isNextItemEnabled()} onClick={()=> this.handleNextClick()}>Next Item</button>
+                    <BotNav></BotNav>
                 </div>
+                
             </div>
         );
     }
   }
   
-  export default SelectorRoom;
+  export default withRouter(SelectorRoom);

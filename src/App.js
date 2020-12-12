@@ -6,7 +6,9 @@ import { createBrowserHistory } from "history";
 import SelectorRoom from './SelectorRoom';
 import Agree from './Agree';
 import Story from './Story';
-import { withRouter } from "react-router";
+import Finish from './Finish'
+import About from './About'
+import { withRouter, Switch } from "react-router";
 
 import { HashRouter, Route, Link } from "react-router-dom";
 
@@ -16,29 +18,26 @@ class App extends React.Component {
   constructor(props) {
     super(props);
   }
-  
+
   render() { 
     return (
       <div className="App" id="outer-container">
-        <HashRouter history={browserHistory} basename={process.env.PUBLIC_URL}>
+        <HashRouter history={browserHistory} >
+          <Sidebar pageWrapId={'page-wrap'} outerContainerId={'outer-container'} history = {browserHistory}/>
           <Route render = {({ location }) => (
-            <Layout location = { location }>
               <Switch location = { location }>
-                  <Route exact path = '/' component = { Home } />
-                  <Route exact path = '/buttons/' component = { Buttons } />
-                  <Route component = { NotFound }/>
+                  <Route exact path="/r/" component={() => <Agree history = {browserHistory} isRegular={true}/>} />
+                  <Route path="/r/story" component={() => <Story history = {browserHistory} isRegular={true}/>} />
+                  <Route path="/r/wait_room" component={() => <WaitingRoom  history = {browserHistory} isRegular={true}/>} />
+                  <Route path="/r/selector" component={() => <SelectorRoom isRegular={true}/>} />
+                  <Route exact path="/v/" component={() => <Agree history = {browserHistory} isRegular={false}/>} />
+                  <Route path="/v/story" component={() => <Story history = {browserHistory}/>} isRegular={false}/>
+                  <Route path="/v/wait_room" component={() => <WaitingRoom  history = {browserHistory}/>} isRegular={false}/>
+                  <Route path="/v/selector" component={() => <SelectorRoom history = {browserHistory} isRegular={false}/>} />
+                  <Route path="/complete_purchase" component={() => <Finish locationData = {location} isRegular={false}/>} />
+                  <Route path="/about" component={() => <About/>} />
                 </Switch>
-            </Layout>
           )} />
-        <Sidebar pageWrapId={'page-wrap'} outerContainerId={'outer-container'} />
-        <Route exact path="/tech-service/r" component={() => <Agree history = {browserHistory} isRegular={true}/>} />
-        <Route path="/tech-service/r/story" component={() => <Story history = {browserHistory} isRegular={true}/>} />
-        <Route path="/tech-service/r/wait_room" component={() => <WaitingRoom name={'незнакомец'} history = {browserHistory} isRegular={true}/>} />
-        <Route path="/tech-service/r/selector" component={() => <SelectorRoom isRegular={true}/>} />
-        <Route exact path="/tech-service/v" component={() => <Agree history = {browserHistory}/>} />
-        <Route path="/tech-service/v/story" component={() => <Story history = {browserHistory}/>} />
-        <Route path="/tech-service/v/wait_room" component={() => <WaitingRoom name={'незнакомец'} history = {browserHistory}/>} />
-        <Route path="/tech-service/v/selector" component={SelectorRoom} />
         </HashRouter>
       </div>
     );

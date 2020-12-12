@@ -14,20 +14,21 @@ class WaitingRoom extends React.Component {
   routingFunction = () => {
     if (this.props.isRegular === true) {
       this.props.history.push({
-          pathname: '/tech-service/r/selector'
+          pathname: '/r/selector'
       });
     }
     else {
       this.props.history.push({
-        pathname: '/tech-service/v/selector'
+        pathname: '/v/selector'
       });
     }
   }
   
   render() {
+    var isRegular = this.props.isRegular;
     return ( 
       <div className="flex-content">
-        <h1>Привет {this.props.name}</h1>
+        {isRegular === true ? <h1>Regular User</h1> : <h1>Vip User</h1>}
         <CountdownCircleTimer
           onComplete={() => {
             this.routingFunction()

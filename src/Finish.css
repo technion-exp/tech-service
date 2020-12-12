@@ -1,0 +1,25 @@
+.finish-flex-content {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    font-family: 'NunitoSans-Light';
+    background-color: #F7F7F7;
+    height: 100vh;
+    margin: 0;
+    padding-top: 1%;
+    padding-right: 1%;
+    padding-left: 1%;
+  }
+
+  .finish-gallery {
+    padding: 2%;
+    min-height: 1px;
+    height:340px;
+    width: 50%;
+    border: 1px solid #ddd;
+    overflow: auto;
+    text-align: center;
+    background: white;
+    overflow: scroll;
+    overflow-x: hidden;
+  }

@@ -1,5 +1,6 @@
 import React from 'react';
 import './Story.css';
+import { withRouter } from "react-router";
 
 class Story extends React.Component{
     constructor (props) {
@@ -12,12 +13,12 @@ class Story extends React.Component{
     handleClick = () => {
       if (this.props.isRegular === true) {
         this.props.history.push({
-            pathname: '/tech-service/r/wait_room'
+            pathname: '/r/wait_room'
         });
       }
       else {
         this.props.history.push({
-          pathname: '/tech-service/v/wait_room'
+          pathname: '/v/wait_room'
         });
       }
     }
@@ -36,4 +37,4 @@ class Story extends React.Component{
     }
   }
   
-  export default Story;
+  export default withRouter(Story);

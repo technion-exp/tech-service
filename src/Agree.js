@@ -13,12 +13,12 @@ class Agree extends React.Component{
     handleClick = () => {
       if (this.props.isRegular === true) {
         this.props.history.push({
-            pathname: '/tech-service/r/story'
+            pathname: '/r/story'
         });
       }
       else {
         this.props.history.push({
-          pathname: '/tech-service/v/story'
+          pathname: '/v/story'
         });
       }
     }
