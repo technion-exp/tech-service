@@ -1,12 +1,28 @@
 .flex-content {
     display: flex;
-    flex-flow: row;
+    flex-flow: column;
     align-items: center;
     justify-content: center;
     font-family: 'NunitoSans-Light';
     background-color: #F7F7F7;
     height: 100vh;
     margin: 0;
+    line-height: 30px;
+    font-weight: bold;
+    color: black;
+    border-right: 2px solid;
+    border-radius: 10px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+  @keyframes animated-border {
+    0% {
+      box-shadow: 0 0 0 0 rgba(255,255,255,0.4);
+    }
+    100% {
+       box-shadow: 0 0 0 20px rgba(255,255,255,0);
+    }
   }
 
   @keyframes walkanim {
@@ -14,15 +30,16 @@
   }
   @keyframes stroll {
     from { transform: translateX(-100%); }
-    to { transform: translateX(200%); }
+    to { transform: translateX(300%); }
   }
   #walk-container {
     display: inline-block;
     position: relative;
     width: 20%;
-    padding-bottom: 30%; 
+    padding-bottom: 23%; 
     vertical-align: middle; 
     overflow: hidden; 
+    animation-delay: 2s;
   }
   #walk {
     display: inline-block;
@@ -30,11 +47,11 @@
     top: 0;
     left: 0;
     width: 50%;
-    height: 40%;
+    height: 50%;
     background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/walk-sequence.svg);
     background-repeat: no-repeat;
     background-size: 800%;
-    
+    animation-delay: 2s;
   }
   
   button{

@@ -70,3 +70,32 @@ class SelectorRoom extends React.Component{
      text-decoration: none;
    }
   
+
+   @keyframes walkanim {
+    to { background-position: 100% 0; }
+  }
+  @keyframes stroll {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(500%); }
+  }
+  #walk-container {
+    display: inline-block;
+    position: relative;
+    width: 20%;
+    padding-bottom: 30%; 
+    vertical-align: middle; 
+    overflow: hidden; 
+    animation: stroll 5s linear;
+  }
+  #walk {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 50%;
+    background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/walk-sequence.svg);
+    background-repeat: no-repeat;
+    background-size: 800%;
+    
+  }

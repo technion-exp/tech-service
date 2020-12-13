@@ -4,12 +4,35 @@ import { withRouter } from 'react-router-dom';
 import './WaitingRoom.css';
 
 
-var numOfPersons = 8;
+
+var personDetails = [
+  {
+    animation1: {animation: 'stroll 5s linear'},
+    animation2: {animation: 'walkanim 1s infinite steps(7)'},
+    timeout: 5000
+  }, 
+  {
+    animation1: {animation: 'stroll 3s linear'},
+    animation2: {animation: 'walkanim 1s infinite steps(7)'},
+    timeout: 3000
+  }, 
+  {
+    animation1: {animation: 'stroll 10s linear'},
+    animation2: {animation: 'walkanim 1s infinite steps(7)'}, 
+    timeout: 10000
+  }, 
+  {
+    animation1: {animation: 'stroll 3s linear'},
+    animation2: {animation: 'walkanim 1s infinite steps(7)'}, 
+    timeout: 3000
+  }, 
+
+]
 
 class WaitingRoom extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {isRedirect: true, persons: [true,true,true,true,true,true,true,true,]};
+    this.state = {isRedirect: true, currentPerson: 0};
     this.routingFunction = this.routingFunction.bind(this);
     this.removePerson = this.removePerson.bind(this);
   }
@@ -28,31 +51,43 @@ class WaitingRoom extends React.Component {
   }
 
 
-  removePerson(timing) {
-    var newPersons = this.state.persons;
-    newPersons[timing] = false;
-    this.setState({persons: newPersons})
+  removePerson() {
+    var newPersons = this.state.currentPerson + 1
+    console.log("removing " + this.state.currentPerson)
+    if (newPersons === personDetails.length)
+    {
+      //this.routingFunction();
+    }
+    else {
+      this.setState({currentPerson: newPersons})
+    }
+    
   }
 
-  drawPerson(contStyleObject, walkStyleObject, timing) {
-    setTimeout(this.removePerson, timing.timeout, timing.person-1)
+  drawPerson(currentPerson) {
+    var personDescription = personDetails[currentPerson];
+    var numberStyle = currentPerson === 3 ? {color: 'Green'} : {color: 'Grey'}
+    var personDisplay = currentPerson === 3 ? 'Your turn' : currentPerson;
+    setTimeout(this.removePerson, personDescription.timeout)
     return (        
-    <div id="walk-container" style={contStyleObject}>
-      <div id="walk" style={walkStyleObject}></div>
+    <div id="walk-container" style={personDescription.animation1}>
+      <div style={{paddingLeft: "40px"}}><label style={numberStyle}>{personDisplay}</label></div>
+      <div id="walk" style={personDescription.animation2}></div>
     </div>)
   }
-  
+  px
   render() {
     var isRegular = this.props.isRegular;
     return ( 
-      <div className="flex-content">
-        {this.drawPerson({animation: 'stroll 9s linear'}, {animation: 'walkanim 1s infinite steps(7)', border: '2px solid green'}, {timeout: 4000, person: 6})}
-        {this.drawPerson({animation: 'stroll 8s linear'}, {animation: 'walkanim 1s infinite steps(7)'}, {timeout: 4000, person: 5})}
-        {this.drawPerson({animation: 'stroll 7s linear'}, {animation: 'walkanim 1s infinite steps(7)'}, {timeout: 4000, person: 4})}
-        {this.drawPerson({animation: 'stroll 6s linear'}, {animation: 'walkanim 1s infinite steps(7)'}, {timeout: 4000, person: 3})}
-        {this.drawPerson({animation: 'stroll 5s linear'}, {animation: 'walkanim 1s infinite steps(7)'}, {timeout: 4000, person: 2})}
-        {this.state.persons[0] === true ? this.drawPerson({animation: 'stroll 4s linear'}, {animation: 'walkanim 1s infinite steps(7)'}, {timeout: 10000, person: 1}) : null}
-
+      <div>
+        <div className="flex-content">
+          {this.state.currentPerson === 0 ? this.drawPerson(this.state.currentPerson) : null}
+          {this.state.currentPerson === 1 ? this.drawPerson(this.state.currentPerson) : null}
+          {this.state.currentPerson === 2 ? this.drawPerson(this.state.currentPerson) : null}
+          {this.state.currentPerson === 3 ? this.drawPerson(this.state.currentPerson) : null}
+          { this.state.currentPerson < 3 ? <h2> <br></br><br></br> {3-this.state.currentPerson} more persons</h2> : <h2> <br></br><br></br> Service is starting...</h2>}
+        </div>
+        
       </div>
     )
   }
